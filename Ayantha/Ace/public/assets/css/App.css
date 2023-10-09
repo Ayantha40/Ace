@@ -1,0 +1,11 @@
+body {
+    background-image:url("/assets/img/jj.jpg") ;
+    background-size: cover; 
+}
+
+.card-header{
+    font-size: 18px;
+}
+.login{
+    min-height: 100px;
+}

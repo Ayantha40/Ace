@@ -1,0 +1,11 @@
+body {
+    background-color: aliceblue;
+    background-size: cover; 
+}
+
+.card-header{
+    font-size: 18px;
+}
+.login{
+    min-height: 100px;
+}

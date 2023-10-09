@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .row.portfolio-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-lg-4, .col-md-6 {
+            flex: 0 0 calc(33.3333% - 20px);
+            margin: 10px;
+            box-sizing: border-box;
+        }
+
+        .portfolio-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .portfolio-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .portfolio-info h4 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .portfolio-info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .portfolio-lightbox {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #cart-total {
+            font-weight: bold;
+        }
+        .add-to-cart, #checkout-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    .add-to-cart:hover, #checkout-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Style the checkout table */
+    .shopping-cart {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 20px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .shopping-cart table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .shopping-cart th, .shopping-cart td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .shopping-cart th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .shopping-cart td {
+        background-color: #fff;
+    }
+
+    .cart-action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    .cart-action-buttons button {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        margin-left: 10px;
+    }
+
+    .cart-action-buttons button:hover {
+        background-color: #c82333;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-img"><img src="assets\img\dome.jpg" class="img-fluid" alt=""></div>
+            <div class="portfolio-info">
+              <h4>Dome Cameras</h4>
+              <p>50$</p>
+              <a href="assets\img\dome.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Discreet and solid in any environment">
+                <i class="bx bx-plus"></i><!-- Plus icon -->
+              </a>
+              <button class="add-to-cart" data-name="Dome Cameras" data-price="50">Add to Cart</button>
+              <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+            </div>
+          </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="assets\img\thermal.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>PTZ Cameras</h4>
+                <p>70$</p>
+                <a href="assets\img\thermal.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Pan, tilt, and zoom capabilities for wide-area coverage"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="PTZ Cameras" data-price="70">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="assets\img\tc.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Thermal Cameras</h4>
+                <p>80$</p>
+                <a href="assets\img\tc.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Temperature monitoring and heat-based detection - regardless of visibility"> <i class="bx bx-plus"></i><!-- Plus icon --></a>
+                <button class="add-to-cart" data-name="Thermal Cameras" data-price="80">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="assets\img\rolling.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Onboard Cameras</h4>
+                <p>40$</p>
+                <a href="assets\img\rolling.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="For use on vehicles and rolling stock"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Onboard Cameras" data-price="40">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="assets\img\wirekit.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>TC1901 Wire Kit </h4>
+                <p>30$</p>
+                <a href="assets\img\wirekit.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Wire Kit for C15 Network Pendant Speaker Series"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="TC1901 Wire Kit" data-price="30">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="assets\img\box cam.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Box Camera</h4>
+                <p>45$</p>
+                <a href="assets\img\box cam.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Deterrence in any environment"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Box Camera" data-price="45">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="assets\img\acs.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Access control management software</h4>
+                <p>180$</p>
+                <a href="assets\img\acs.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Access control management for every need"> <i class="bx bx-plus"></i><!-- Plus icon -->
+              </a>
+                <button class="add-to-cart" data-name="Accesss control management software" data-price="180">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="assets\img\pc.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Power and connectivity</h4>
+                <p>60$</p>
+                <a href="assets\img\pc.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="All you need to power your system and connect its components"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Power and connectivity" data-price="60">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="assets\img\bullet cam.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Bullet Camera</h4>
+                <p>38$</p>
+                <a href="assets\img\bullet cam.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="For all purposes in any environment"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Bullet Camera" data-price="38">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="assets\img\readers.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Readers</h4>
+                <p>100$</p>
+                <a href="assets\img\readers.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Indoor and outdoor readers for access control and more"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Readers" data-price="100">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="assets\img\io.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Network I/O Relay Modules</h4>
+                <p>90$</p>
+                <a href="assets\img\io.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Intelligent modules for extended functionality"> <i class="bx bx-plus"></i><!-- Plus icon -->
+              </a>
+              <button class="add-to-cart" data-name="Network I/O Relay Modules" data-price="90">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="assets\img\credentials.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Credentials</h4>
+                <p>10$</p>
+                <a href="assets\img\credentials.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="User credentials for access control systems"> <i class="bx bx-plus"></i><!-- Plus icon -->
+              </a>
+              <button class="add-to-cart" data-name="Credentials" data-price="10">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="assets\img\TA.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>TA4701 Access Card </h4>
+                <p>10$</p>
+                <a href="assets\img\TA.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Secure access card made from recycled material"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="TA4701 Access Card" data-price="10">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="assets\img\door.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Network Door Controllers</h4>
+                <p>120$</p>
+                <a href="assets\img\door.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Open and flexible – powered by IP"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Network Door Controllers" data-price="120">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="assets\img\illuminator.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Illuminators</h4>
+                <p>45$</p>
+                <a href="assets\img\illuminator.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="White and infra-red LED illuminators"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Illumniators" data-price="45">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="assets\img\joystick.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Joysticks and Keypads</h4>
+                <p>95$</p>
+                <a href="assets\img\joystick.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Modular control board for professional camera and video management"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Joysticks and Keypads" data-price="95">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="assets\img\sd.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Storage</h4>
+                <p>20$</p>
+                <a href="assets\img\sd.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Reliable storage on hard drives or SD cards"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Storage" data-price="20">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="assets\img\Tools.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Tools & Extras</h4>
+                <p>150$</p>
+                <a href="assets\img\Tools.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Tools and accessories to manage, maintan and wash your products"> <i class="bx bx-plus"></i><!-- Plus icon -->
+                </a>
+                <button class="add-to-cart" data-name="Tools & Extras" data-price="150">Add to Cart</button>
+                <a href="portfolio-details.html" class="details-link" title="More Details"></a>
+              </div>
+            </div>
+  
+          </div>
+    
+    <h2>Shopping Cart</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            
+        </tbody>
+       
+        <tfoot>
+            <tr>
+                <td colspan="3">Total:</td>
+                <td id="cart-total">0</td>
+                <td></td>
+            </tr>
+        </tfoot>
+      
+    </table>
+    <div class="shopping-cart">
+        <div class="cart-action-buttons">
+            <button id="checkout-button">Checkout</button>
+        </div>
+    </div>
+    <script>
+              const cart = [];
+        const cartItemsElement = document.getElementById("cart-items");
+        const cartTotalElement = document.getElementById("cart-total");
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCart();
+        }
+
+        function removeFromCart(name) {
+            const itemIndex = cart.findIndex(item => item.name === name);
+            if (itemIndex !== -1) {
+                const item = cart[itemIndex];
+                if (item.quantity > 1) {
+                    item.quantity--;
+                } else {
+                    cart.splice(itemIndex, 1);
+                }
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            cartItemsElement.innerHTML = "";
+            let total = 0;
+            cart.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>$${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${item.price * item.quantity}</td>
+                    <td>
+                        <button onclick="removeFromCart('${item.name}')">-</button>
+                        <button onclick="addToCart('${item.name}', ${item.price})">+</button>
+                    </td>
+                `;
+                cartItemsElement.appendChild(row);
+                total += item.price * item.quantity;
+            });
+            cartTotalElement.textContent = "$" + total.toFixed(2);
+        }
+        
+        // Add event listeners to the "Add to Cart" buttons
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const name = this.getAttribute("data-name");
+                const price = parseFloat(this.getAttribute("data-price"));
+                addToCart(name, price);
+            });
+        });
+        // Add event listener for the checkout button
+        const checkoutButton = document.getElementById("checkout-button");
+        checkoutButton.addEventListener("click", function() {
+            // Implement your checkout logic here
+            alert("Thank you for your Purchase!!. You may now directed to the payment page");
+        });
+    </script>
+</body>
+</html>
